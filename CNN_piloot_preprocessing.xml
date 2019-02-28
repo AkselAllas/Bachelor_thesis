@@ -202,6 +202,7 @@
       <sourceProduct.5 refid="BandMaths(6)"/>
       <sourceProduct.6 refid="BandMaths(7)"/>
       <sourceProduct.7 refid="BandMaths(8)"/>
+      <sourceProduct.8 refid="Subset"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands/>
