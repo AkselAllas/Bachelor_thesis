@@ -208,13 +208,38 @@
       <geographicError>1.0E-5</geographicError>
     </parameters>
   </node>
+  <node id="Import-Vector">
+    <operator>Import-Vector</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <vectorFile>/home/rus/Aksel/Testala_klasside_shp/rohttaimed.shp</vectorFile>
+      <separateShapes>false</separateShapes>
+    </parameters>
+  </node>
+  <node id="Land-Sea-Mask">
+    <operator>Land-Sea-Mask</operator>
+    <sources>
+      <sourceProduct refid="Import-Vector"/>
+      <sourceProduct.1 refid="BandMerge"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands>B1::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B2::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B3::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B4::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B5::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B6::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B7::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8A::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B9::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B11::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B12::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,TC_Wetness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Brightness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,Misra_Yellow_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,PSRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,WRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,NDVIre::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,NDVI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath</sourceBands>
+      <landMask>false</landMask>
+      <useSRTM>true</useSRTM>
+      <geometry>rohttaimed::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</geometry>
+      <invertGeometry>false</invertGeometry>
+      <shorelineExtension>0</shorelineExtension>
+    </parameters>
+  </node>
   <node id="Write">
     <operator>Write</operator>
     <sources>
-      <sourceProduct refid="BandMerge"/>
+      <sourceProduct refid="Land-Sea-Mask"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath.dim</file>
+      <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled.dim</file>
       <formatName>BEAM-DIMAP</formatName>
     </parameters>
   </node>
@@ -256,8 +281,14 @@
     <node id="BandMerge">
       <displayPosition x="296.0" y="125.0"/>
     </node>
+    <node id="Import-Vector">
+      <displayPosition x="170.0" y="76.0"/>
+    </node>
+    <node id="Land-Sea-Mask">
+      <displayPosition x="282.0" y="76.0"/>
+    </node>
     <node id="Write">
-            <displayPosition x="455.0" y="135.0"/>
+            <displayPosition x="445.0" y="75.0"/>
     </node>
   </applicationData>
 </graph>
