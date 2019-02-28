@@ -13,10 +13,10 @@
       <sourceProduct refid="Read"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <referenceBand>B2</referenceBand>
+      <referenceBand/>
       <targetWidth/>
       <targetHeight/>
-      <targetResolution/>
+      <targetResolution>10</targetResolution>
       <upsampling>Nearest</upsampling>
       <downsampling>First</downsampling>
       <flagDownsampling>First</flagDownsampling>
