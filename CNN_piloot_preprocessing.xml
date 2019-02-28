@@ -9,11 +9,13 @@
   </node>
   <node id="Resample">
     <operator>Resample</operator>
-    <sources/>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <referenceBand/>
-      <targetWidth>10980</targetWidth>
-      <targetHeight>10980</targetHeight>
+      <referenceBand>B2</referenceBand>
+      <targetWidth/>
+      <targetHeight/>
       <targetResolution/>
       <upsampling>Nearest</upsampling>
       <downsampling>First</downsampling>
@@ -81,26 +83,6 @@
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands/>
       <geographicError>1.0E-5</geographicError>
-    </parameters>
-  </node>
-  <node id="Import-Vector(2)">
-    <operator>Import-Vector</operator>
-    <sources>
-      <sourceProduct refid="Subset"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <vectorFile>/home/rus/Aksel/Testala_klasside_shp/liblikielised.shp</vectorFile>
-      <separateShapes>false</separateShapes>
-    </parameters>
-  </node>
-  <node id="Import-Vector(3)">
-    <operator>Import-Vector</operator>
-    <sources>
-      <sourceProduct refid="Subset"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <vectorFile>/home/rus/Aksel/Testala_klasside_shp/Suvinisu.shp</vectorFile>
-      <separateShapes>false</separateShapes>
     </parameters>
   </node>
   <node id="BandMaths(2)">
@@ -243,7 +225,7 @@
       <sourceProduct.1 refid="Import-Vector"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands>NDVI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,NDVIre::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,WRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,PSRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,Misra_Yellow_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Brightness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Wetness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,B1::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B2::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B3::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B4::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B5::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B6::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B7::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8A::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B9::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B11::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B12::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</sourceBands>
+      <sourceBands/>
       <landMask>false</landMask>
       <useSRTM>true</useSRTM>
       <geometry>rohttaimed::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</geometry>
@@ -251,51 +233,11 @@
       <shorelineExtension>0</shorelineExtension>
     </parameters>
   </node>
-  <node id="Land-Sea-Mask(2)">
-    <operator>Land-Sea-Mask</operator>
-    <sources>
-      <sourceProduct refid="BandMerge"/>
-      <sourceProduct.1 refid="Import-Vector(2)"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands>NDVI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,NDVIre::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,WRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,PSRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,Misra_Yellow_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Brightness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Wetness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,B1::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B2::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B3::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B4::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B5::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B6::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B7::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8A::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B9::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B11::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B12::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</sourceBands>
-      <landMask>false</landMask>
-      <useSRTM>true</useSRTM>
-      <geometry>liblikielised::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</geometry>
-      <invertGeometry>false</invertGeometry>
-      <shorelineExtension>0</shorelineExtension>
-    </parameters>
-  </node>
-  <node id="Land-Sea-Mask(3)">
-    <operator>Land-Sea-Mask</operator>
-    <sources>
-      <sourceProduct refid="BandMerge"/>
-      <sourceProduct.1 refid="Import-Vector(3)"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands>NDVI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,NDVIre::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,WRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,PSRI::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,Misra_Yellow_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Brightness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Vegetation::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,TC_Wetness::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath,B1::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B2::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B3::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B4::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B5::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B6::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B7::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B8A::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B9::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B11::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled,B12::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</sourceBands>
-      <landMask>false</landMask>
-      <useSRTM>true</useSRTM>
-      <geometry>Suvinisu::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</geometry>
-      <invertGeometry>false</invertGeometry>
-      <shorelineExtension>0</shorelineExtension>
-    </parameters>
-  </node>
-  <node id="BandMerge(2)">
-    <operator>BandMerge</operator>
-    <sources>
-      <sourceProduct refid="Land-Sea-Mask"/>
-      <sourceProduct.1 refid="Land-Sea-Mask(2)"/>
-      <sourceProduct.2 refid="Land-Sea-Mask(3)"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands/>
-      <geographicError>1.0E-5</geographicError>
-    </parameters>
-  </node>
   <node id="Write">
     <operator>Write</operator>
-    <sources/>
+    <sources>
+      <sourceProduct refid="Land-Sea-Mask"/>
+    </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath.dim</file>
       <formatName>BEAM-DIMAP</formatName>
@@ -304,64 +246,49 @@
   <applicationData id="Presentation">
     <Description/>
     <node id="Read">
-            <displayPosition x="31.0" y="170.0"/>
+            <displayPosition x="31.0" y="159.0"/>
     </node>
     <node id="Resample">
-      <displayPosition x="103.0" y="169.0"/>
+      <displayPosition x="104.0" y="159.0"/>
     </node>
     <node id="Subset">
-      <displayPosition x="194.0" y="171.0"/>
+      <displayPosition x="194.0" y="159.0"/>
     </node>
     <node id="BandMaths">
-      <displayPosition x="243.0" y="204.0"/>
+      <displayPosition x="279.0" y="208.0"/>
     </node>
     <node id="Import-Vector">
-      <displayPosition x="119.0" y="50.0"/>
+      <displayPosition x="141.0" y="88.0"/>
     </node>
     <node id="BandMerge">
-      <displayPosition x="246.0" y="136.0"/>
-    </node>
-    <node id="Import-Vector(2)">
-      <displayPosition x="104.0" y="79.0"/>
-    </node>
-    <node id="Import-Vector(3)">
-      <displayPosition x="105.0" y="103.0"/>
+      <displayPosition x="278.0" y="160.0"/>
     </node>
     <node id="BandMaths(2)">
-      <displayPosition x="233.0" y="233.0"/>
+      <displayPosition x="271.0" y="231.0"/>
     </node>
     <node id="BandMaths(3)">
-      <displayPosition x="237.0" y="259.0"/>
+      <displayPosition x="271.0" y="257.0"/>
     </node>
     <node id="BandMaths(4)">
-      <displayPosition x="236.0" y="282.0"/>
+      <displayPosition x="271.0" y="282.0"/>
     </node>
     <node id="BandMaths(5)">
-      <displayPosition x="237.0" y="306.0"/>
+      <displayPosition x="272.0" y="308.0"/>
     </node>
     <node id="BandMaths(6)">
-      <displayPosition x="238.0" y="332.0"/>
+      <displayPosition x="272.0" y="335.0"/>
     </node>
     <node id="BandMaths(7)">
-      <displayPosition x="239.0" y="354.0"/>
+      <displayPosition x="272.0" y="362.0"/>
     </node>
     <node id="BandMaths(8)">
-      <displayPosition x="240.0" y="379.0"/>
+      <displayPosition x="272.0" y="388.0"/>
     </node>
     <node id="Land-Sea-Mask">
-      <displayPosition x="253.0" y="47.0"/>
-    </node>
-    <node id="Land-Sea-Mask(2)">
-      <displayPosition x="242.0" y="71.0"/>
-    </node>
-    <node id="Land-Sea-Mask(3)">
-      <displayPosition x="242.0" y="96.0"/>
-    </node>
-    <node id="BandMerge(2)">
-      <displayPosition x="400.0" y="72.0"/>
+      <displayPosition x="263.0" y="89.0"/>
     </node>
     <node id="Write">
-            <displayPosition x="525.0" y="72.0"/>
+            <displayPosition x="416.0" y="89.0"/>
     </node>
   </applicationData>
 </graph>
