@@ -29,7 +29,7 @@
       <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands>B1,B2,B3,B4,B5,B6,B7,B8,B8A,B9,B11,B12</sourceBands>
+      <sourceBands/>
       <region>7028,7591,2048,2048</region>
       <geoRegion/>
       <subSamplingX>1</subSamplingX>
@@ -222,31 +222,21 @@
     <operator>Land-Sea-Mask</operator>
     <sources>
       <sourceProduct.1 refid="Import-Vector"/>
+      <sourceProduct.1 refid="BandMerge"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands/>
       <landMask>false</landMask>
       <useSRTM>true</useSRTM>
-      <geometry>rohttaimed::Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled</geometry>
+      <geometry/>
       <invertGeometry>false</invertGeometry>
       <shorelineExtension>0</shorelineExtension>
-    </parameters>
-  </node>
-  <node id="BandMerge(2)">
-    <operator>BandMerge</operator>
-    <sources>
-      <sourceProduct refid="BandMerge"/>
-      <sourceProduct.1 refid="Land-Sea-Mask"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands/>
-      <geographicError>1.0E-5</geographicError>
     </parameters>
   </node>
   <node id="Write">
     <operator>Write</operator>
     <sources>
-      <sourceProduct refid="BandMerge(2)"/>
+      <sourceProduct refid="Land-Sea-Mask"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath.dim</file>
@@ -297,11 +287,8 @@
     <node id="Land-Sea-Mask">
       <displayPosition x="267.0" y="90.0"/>
     </node>
-    <node id="BandMerge(2)">
-      <displayPosition x="411.0" y="130.0"/>
-    </node>
     <node id="Write">
-            <displayPosition x="546.0" y="130.0"/>
+            <displayPosition x="419.0" y="90.0"/>
     </node>
   </applicationData>
 </graph>
