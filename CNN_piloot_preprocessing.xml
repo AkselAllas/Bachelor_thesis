@@ -4,7 +4,7 @@
     <operator>Read</operator>
     <sources/>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504.SAFE</file>
+      <file>/home/rus/Aksel/S2_Products/@@@@</file>
     </parameters>
   </node>
   <node id="Resample">
@@ -215,7 +215,7 @@
       <sourceProduct refid="BandMerge"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath.dim</file>
+      <file>/home/rus/Aksel/Andmed/temp.dim</file>
       <formatName>BEAM-DIMAP</formatName>
     </parameters>
   </node>

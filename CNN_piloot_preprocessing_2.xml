@@ -4,7 +4,7 @@
     <operator>Read</operator>
     <sources/>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath.dim</file>
+      <file>/home/rus/Aksel/Andmed/temp.dim</file>
     </parameters>
   </node>
   <node id="Import-Vector">
@@ -13,7 +13,7 @@
       <sourceProduct refid="Read"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <vectorFile>/home/rus/Aksel/Testala_klasside_shp/rohttaimed.shp</vectorFile>
+      <vectorFile>/home/rus/Aksel/Masks/@@@@</vectorFile>
       <separateShapes>false</separateShapes>
     </parameters>
   </node>
@@ -26,7 +26,7 @@
       <sourceBands/>
       <landMask>false</landMask>
       <useSRTM>true</useSRTM>
-      <geometry>rohttaimed</geometry>
+      <geometry>%%%%</geometry>
       <invertGeometry>false</invertGeometry>
       <shorelineExtension>0</shorelineExtension>
     </parameters>
@@ -37,8 +37,8 @@
       <sourceProduct refid="Land-Sea-Mask"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/Aksel/Andmed/Subset_S2B_MSIL2A_20180714T094029_N0208_R036_T35VMF_20180714T140504_resampled_BandMath.dim</file>
-      <formatName>BEAM-DIMAP</formatName>
+      <file>/home/rus/Aksel/Andmed/TTTT.tif</file>
+      <formatName>GeoTIFF</formatName>
     </parameters>
   </node>
   <applicationData id="Presentation">
