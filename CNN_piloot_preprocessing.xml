@@ -191,6 +191,44 @@
       <variables/>
     </parameters>
   </node>
+  <node id="BandMaths(9)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NPCI</name>
+          <type>float32</type>
+          <expression>(B4 - B2)/(B4 + B2)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(10)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>EVI</name>
+          <type>float32</type>
+          <expression>2.5*(B8 - B4)/(B8+6*B4-7.5*B2+1)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
   <node id="BandMerge">
     <operator>BandMerge</operator>
     <sources>
@@ -202,7 +240,9 @@
       <sourceProduct.5 refid="BandMaths(6)"/>
       <sourceProduct.6 refid="BandMaths(7)"/>
       <sourceProduct.7 refid="BandMaths(8)"/>
-      <sourceProduct.8 refid="Subset"/>
+      <sourceProduct.8 refid="BandMaths(9)"/>
+      <sourceProduct.9 refid="BandMaths(10)"/>
+      <sourceProduct.10 refid="Subset"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands/>
@@ -253,6 +293,12 @@
     </node>
     <node id="BandMaths(8)">
       <displayPosition x="289.0" y="342.0"/>
+    </node>
+    <node id="BandMaths(9)">
+      <displayPosition x="289.0" y="350.0"/>
+    </node>
+    <node id="BandMaths(10)">
+      <displayPosition x="289.0" y="360.0"/>
     </node>
     <node id="BandMerge">
       <displayPosition x="296.0" y="125.0"/>
