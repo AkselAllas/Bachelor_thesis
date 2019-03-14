@@ -4,7 +4,7 @@
     <operator>Read</operator>
     <sources/>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/Aksel/S2_Products/@@@@</file>
+      <file>/home/paku/Bakatöö/CNN piloot/S2_Products/@@@@</file>
     </parameters>
   </node>
   <node id="Resample">
@@ -30,7 +30,7 @@
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands>B1,B2,B3,B4,B5,B6,B7,B8,B8A,B9,B11,B12</sourceBands>
-      <region>7028,7591,2048,2048</region>
+      <region>6028,7591,2048,2048</region>
       <geoRegion/>
       <subSamplingX>1</subSamplingX>
       <subSamplingY>1</subSamplingY>
@@ -215,7 +215,7 @@
       <sourceProduct refid="BandMerge"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/Aksel/Andmed/temp.dim</file>
+      <file>/home/paku/Bakatöö/CNN piloot/Andmed/TTTT.dim</file>
       <formatName>BEAM-DIMAP</formatName>
     </parameters>
   </node>
