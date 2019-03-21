@@ -6,5 +6,4 @@ for p in $(ls ../S2_Products); do
 	/home/paku/snap/bin/gpt CNN_piloot_preprocessing.xml -c 1200M -q 3 -x -J-Xmx3G -J-Xms1G
 	sed -i "s/$p/@@@@/g" CNN_piloot_preprocessing.xml
 	sed -i "s/$p3/TTTT/g" CNN_piloot_preprocessing.xml
-	break
 done

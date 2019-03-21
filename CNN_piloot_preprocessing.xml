@@ -255,8 +255,8 @@
       <sourceProduct refid="BandMerge"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/paku/Bakatöö/CNN piloot/Andmed/TTTT.dim</file>
-      <formatName>BEAM-DIMAP</formatName>
+      <file>/home/paku/Bakatöö/CNN piloot/Andmed/TTTT.tif</file>
+      <formatName>GeoTIFF</formatName>
     </parameters>
   </node>
   <applicationData id="Presentation">
