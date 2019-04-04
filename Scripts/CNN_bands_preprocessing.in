@@ -1,0 +1,310 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>{{input_safe}}</file>
+    </parameters>
+  </node>
+  <node id="Resample">
+    <operator>Resample</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <referenceBand/>
+      <targetWidth/>
+      <targetHeight/>
+      <targetResolution>10</targetResolution>
+      <upsampling>Nearest</upsampling>
+      <downsampling>First</downsampling>
+      <flagDownsampling>First</flagDownsampling>
+      <resampleOnPyramidLevels>true</resampleOnPyramidLevels>
+    </parameters>
+  </node>
+  <node id="Subset">
+    <operator>Subset</operator>
+    <sources>
+      <sourceProduct refid="Resample"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands>B1,B2,B3,B4,B5,B6,B7,B8,B8A,B9,B11,B12</sourceBands>
+      <region>6028,7591,2048,2048</region>
+      <geoRegion/>
+      <subSamplingX>1</subSamplingX>
+      <subSamplingY>1</subSamplingY>
+      <fullSwath>false</fullSwath>
+      <tiePointGridNames/>
+      <copyMetadata>true</copyMetadata>
+    </parameters>
+  </node>
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>TC_Wetness</name>
+          <type>float32</type>
+          <expression>0.1509*B2+0.1973*B3+0.3279*B4+0.3406*B8-0.7112*B11-0.4572*B12</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(2)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>TC_Vegetation</name>
+          <type>float32</type>
+          <expression>-0.2848*B2-0.2435*B3-0.5436*B4+0.7243*B8+0.0840*B11-0.1800*B12</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(3)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>TC_Brightness</name>
+          <type>float32</type>
+          <expression>0.3037*B2+0.2793*B3+0.4743*B4+0.5585*B8+0.1863*B12</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(4)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>Misra_Yellow_Vegetation</name>
+          <type>float32</type>
+          <expression>0.723*B3-0.597*B4+0.206*B6-0.278*B9</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(5)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>PSRI</name>
+          <type>float32</type>
+          <expression>(B4-B2) / B6</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(6)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>WRI</name>
+          <type>float32</type>
+          <expression>(B3+B4) / (B8+B11)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(7)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NDVIre</name>
+          <type>float32</type>
+          <expression>(B8 - B6)/ (B8+B6)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(8)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NDVI</name>
+          <type>float32</type>
+          <expression>(B8 - B4)/(B8 + B4)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(9)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>NPCI</name>
+          <type>float32</type>
+          <expression>(B4 - B2)/(B4 + B2)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMaths(10)">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>EVI</name>
+          <type>float32</type>
+          <expression>2.5*(B8 - B4)/(B8+6*B4-7.5*B2+1)</expression>
+          <description/>
+          <unit/>
+          <noDataValue>0</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="BandMerge">
+    <operator>BandMerge</operator>
+    <sources>
+      <sourceProduct refid="BandMaths"/>
+      <sourceProduct.1 refid="BandMaths(2)"/>
+      <sourceProduct.2 refid="BandMaths(3)"/>
+      <sourceProduct.3 refid="BandMaths(4)"/>
+      <sourceProduct.4 refid="BandMaths(5)"/>
+      <sourceProduct.5 refid="BandMaths(6)"/>
+      <sourceProduct.6 refid="BandMaths(7)"/>
+      <sourceProduct.7 refid="BandMaths(8)"/>
+      <sourceProduct.8 refid="BandMaths(9)"/>
+      <sourceProduct.9 refid="BandMaths(10)"/>
+      <sourceProduct.10 refid="Subset"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <geographicError>1.0E-5</geographicError>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="BandMerge"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>{{prefix_tif}}.tif</file>
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+            <displayPosition x="37.0" y="134.0"/>
+    </node>
+    <node id="Resample">
+      <displayPosition x="104.0" y="135.0"/>
+    </node>
+    <node id="Subset">
+      <displayPosition x="188.0" y="135.0"/>
+    </node>
+    <node id="BandMaths">
+      <displayPosition x="297.0" y="167.0"/>
+    </node>
+    <node id="BandMaths(2)">
+      <displayPosition x="288.0" y="192.0"/>
+    </node>
+    <node id="BandMaths(3)">
+      <displayPosition x="288.0" y="218.0"/>
+    </node>
+    <node id="BandMaths(4)">
+      <displayPosition x="288.0" y="243.0"/>
+    </node>
+    <node id="BandMaths(5)">
+      <displayPosition x="288.0" y="266.0"/>
+    </node>
+    <node id="BandMaths(6)">
+      <displayPosition x="288.0" y="292.0"/>
+    </node>
+    <node id="BandMaths(7)">
+      <displayPosition x="289.0" y="318.0"/>
+    </node>
+    <node id="BandMaths(8)">
+      <displayPosition x="289.0" y="342.0"/>
+    </node>
+    <node id="BandMaths(9)">
+      <displayPosition x="289.0" y="350.0"/>
+    </node>
+    <node id="BandMaths(10)">
+      <displayPosition x="289.0" y="360.0"/>
+    </node>
+    <node id="BandMerge">
+      <displayPosition x="296.0" y="125.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="455.0" y="135.0"/>
+    </node>
+  </applicationData>
+</graph>
