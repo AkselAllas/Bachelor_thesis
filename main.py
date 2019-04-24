@@ -50,5 +50,5 @@ tile_location = [5,6]
 label_map_tiles = preprocessor.tile_label_map(label_map)
 X_tr = preprocessor.construct_training_set(tile_location)
 labels = preprocessor.construct_labels(label_map_tiles, tile_location)
-plotter.plot_tile(labels_tiles, tile_location)
+plotter.plot_tile(label_map_tiles, tile_location)
 

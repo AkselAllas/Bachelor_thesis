@@ -99,15 +99,15 @@ class s2_preprocessor:
 
     def construct_labels(self, label_map_tiles, tile_location):
         print("=========== CONSTRUCTING LABELS ===========")
-        labels = np.zeros((nb_samples,),dtype = int)
-        for k in range(nb_augmentations):
+        labels = np.zeros((self.nb_samples,),dtype = int)
+        for k in range(self.nb_augmentations):
             label_tile = label_map_tiles[tile_location[0]][tile_location[1]]
             if(not(k==0 or k==4)):
-                label_tile = sk.transform.rotate(label_tile, rotation[k])
+                label_tile = sk.transform.rotate(label_tile, self.rotations[k])
             if(k>3):
                 label_tile = label_tile[:, ::-1]
-            for i in range(tile_dimension):
-                for j in range(tile_dimension):
-                    labels[k*nb_tile_pixels+i*tile_dimension+j] = label_tile[i][j]
+            for i in range(self.tile_dimension):
+                for j in range(self.tile_dimension):
+                    labels[k*self.nb_tile_pixels+i*self.tile_dimension+j] = label_tile[i][j]
         return labels
 
