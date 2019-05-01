@@ -4,7 +4,7 @@
     <operator>Read</operator>
     <sources/>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/shared/Bachelor_thesis/Scripts/20180520.dim</file>
+      <file>/home/rus/shared/Bachelor_thesis/Scripts/20180510_1-1.dim</file>
     </parameters>
   </node>
   <node id="Import-Vector">
@@ -37,7 +37,7 @@
       <sourceProduct refid="Land-Sea-Mask"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <file>/home/rus/shared/Bachelor_thesis/Label_tifs/Mask_talinisu.tif</file>
+      <file>/home/rus/shared/Bachelor_thesis/Label_tifs/Mask_talinisu_1-1.tif</file>
       <formatName>GeoTIFF</formatName>
     </parameters>
   </node>
