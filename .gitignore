@@ -2,3 +2,5 @@
 *.SAFE
 *.dim
 *.data
+*.swp
+Models/*.h5
