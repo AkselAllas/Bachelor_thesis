@@ -4,9 +4,10 @@ import numpy as np
 
 class plotter:
 
-    def __init__(self, s2_preprocessor=None, s2_model=None):
+    def __init__(self, s2_preprocessor=None, s2_model=None, cmap='viridis'):
         self.s2_preprocessor = s2_preprocessor
         self.s2_model = s2_model
+        self.cmap = cmap
 
     def plot_labels(self, labels):
         f, arr = plt.subplots()
@@ -15,7 +16,9 @@ class plotter:
         plt.show()
    
     def plot_tile(self, label_map_tiles, tile_location): 
-        plt.imshow(label_map_tiles[tile_location[0]][tile_location[1]])
+        f, arr = plt.subplots()
+        img = arr.imshow(label_map_tiles[tile_location[0]][tile_location[1]],vmin=0,vmax=7,cmap=self.cmap)
+        cig = f.colorbar(img)
         plt.show()
 
     def plot_model_result(self, hist):
@@ -25,7 +28,7 @@ class plotter:
         train_acc=hist.history['acc']
         val_acc=hist.history['val_acc']
         mse=hist.history['mean_squared_error']
-        xc=range(s2_model.nb_epochs)
+        xc=range(len(train_loss))
 
         plt.figure(1,figsize=(7,5))
         plt.plot(xc,train_loss)
@@ -50,15 +53,42 @@ class plotter:
         plt.style.use(['classic'])
         plt.show()
 
-    def plot_model_prediction(self, y_predictions, tile_location):
-        prediction_map = np.zeros((s2_preprocessor.tile_dimension,s2_preprocessor.tile_dimension))
+    def plot_model_prediction(self, y_predictions, tile_location, label_map_tiles):
+        prediction_map = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
+        f, axarr = plt.subplots(2,2)
         count=0
-        for i in range(s2_preprocessor.tile_dimension):
-            for j in range(s2_preprocessor.tile_dimension):
-                    prediction_map[i][j] = y_predictions[s2_preprocessor.tile_dimension*i+j]
-                    if prediction_map[i][j]==label_tulemus[tile_location[0]][tile_location[1]][i][j]:
+        for i in range(self.s2_preprocessor.tile_dimension):
+            for j in range(self.s2_preprocessor.tile_dimension):
+                    prediction_map[i][j] = y_predictions[self.s2_preprocessor.tile_dimension*i+j]
+                    if(prediction_map[i][j]==label_map_tiles[tile_location[0]][tile_location[1]][i][j]):
                         count+=1
         print("Accuracy is:")
-        print(count/(s2_preprocessor.tile_dimension*s2_preprocessor.tile_dimension))
-        plt.imshow(prediction_map)
+        print(count/(self.s2_preprocessor.tile_dimension*self.s2_preprocessor.tile_dimension))
+        axarr[0][0].imshow(prediction_map)
+        axarr[0][1].imshow(label_map_tiles[tile_location[0]][tile_location[1]])
+        plt.show()
+
+    def plot_input_vs_label(self, label_map_tiles, tile_location, input_data):
+        f, axarr = plt.subplots(2,2)
+
+
+        input_data_map = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
+        for i in range(self.s2_preprocessor.tile_dimension):
+            for j in range(self.s2_preprocessor.tile_dimension):
+                    input_data_map[i][j] = input_data[self.s2_preprocessor.tile_dimension*i+j][5][2][2][0]
+
+        axarr[0][0].imshow(input_data_map)
+        axarr[0][1].imshow(label_map_tiles[tile_location[0]][tile_location[1]])
+        plt.show()
+
+    def plot_labels(self, labels):
+        f, arr = plt.subplots()
+
+        labels_map  = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
+        for i in range(self.s2_preprocessor.tile_dimension):
+            for j in range(self.s2_preprocessor.tile_dimension):
+                    labels_map[i][j] = labels[self.s2_preprocessor.tile_dimension*i+j]
+
+        img = arr.imshow(labels_map,vmin=0,vmax=7,cmap=self.cmap)
+        cig = f.colorbar(img)
         plt.show()
