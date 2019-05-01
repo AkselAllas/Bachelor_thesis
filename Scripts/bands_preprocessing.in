@@ -23,26 +23,10 @@
       <resampleOnPyramidLevels>true</resampleOnPyramidLevels>
     </parameters>
   </node>
-  <node id="Subset">
-    <operator>Subset</operator>
-    <sources>
-      <sourceProduct refid="Resample"/>
-    </sources>
-    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands>B1,B2,B3,B4,B5,B6,B7,B8,B8A,B9,B11,B12</sourceBands>
-      <region>6028,7591,2048,2048</region>
-      <geoRegion/>
-      <subSamplingX>1</subSamplingX>
-      <subSamplingY>1</subSamplingY>
-      <fullSwath>false</fullSwath>
-      <tiePointGridNames/>
-      <copyMetadata>true</copyMetadata>
-    </parameters>
-  </node>
   <node id="BandMaths">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -61,7 +45,7 @@
   <node id="BandMaths(2)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -80,7 +64,7 @@
   <node id="BandMaths(3)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -99,7 +83,7 @@
   <node id="BandMaths(4)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -118,7 +102,7 @@
   <node id="BandMaths(5)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -137,7 +121,7 @@
   <node id="BandMaths(6)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -156,7 +140,7 @@
   <node id="BandMaths(7)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -175,7 +159,7 @@
   <node id="BandMaths(8)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -194,7 +178,7 @@
   <node id="BandMaths(9)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -213,7 +197,7 @@
   <node id="BandMaths(10)">
     <operator>BandMaths</operator>
     <sources>
-      <sourceProduct refid="Subset"/>
+      <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <targetBands>
@@ -242,7 +226,7 @@
       <sourceProduct.7 refid="BandMaths(8)"/>
       <sourceProduct.8 refid="BandMaths(9)"/>
       <sourceProduct.9 refid="BandMaths(10)"/>
-      <sourceProduct.10 refid="Subset"/>
+      <sourceProduct.10 refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
       <sourceBands/>
@@ -266,9 +250,6 @@
     </node>
     <node id="Resample">
       <displayPosition x="104.0" y="135.0"/>
-    </node>
-    <node id="Subset">
-      <displayPosition x="188.0" y="135.0"/>
     </node>
     <node id="BandMaths">
       <displayPosition x="297.0" y="167.0"/>
