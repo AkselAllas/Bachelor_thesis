@@ -1,11 +1,12 @@
 #!/bin/bash
 echo "================ Phase 1 ================="
+#Generate .dim files, which are needed to make label masks 
 
 GPT_PATH=/sar/aksel_snap/snap/bin/gpt
 OUTPUT_PATH=/sar/aksel/Bachelor_thesis/Scripts/
 INPUT_PATH=/sar/aksel/Bachelor_thesis/S2_Products/
 
-#Generate .dim files, which are needed to make label masks 
+#NB! The generated files will get the suffix '_y-x' where y will show the tile's number along y-axis and x along x-axis. This is so that tile location notation would be the same as the way python 2D arrays are indexed.
 for product in $(ls $INPUT_PATH); do
         index=$((${#product}-4))
         product_file_extension="${product:$index:4}"
@@ -14,8 +15,8 @@ for product in $(ls $INPUT_PATH); do
         if [ "${product_file_extension}" = "SAFE" ]; then
                 for (( k = 0; k < 2; k++ )); do
                         for (( l = 0; l < 2; l++ )); do
-                                y=$( expr 5120 '*' "$k")
-                                x=$( expr 5120 '*' "$l" + 740 )
+                                y=$( expr 5120 '*' "$l")
+                                x=$( expr 5120 '*' "$k" + 740 )
                                 subset_parameters="$x,$y,5120,5120"
                                 sed "s@{{input_safe}}@${INPUT_PATH}${product}@g; s@{{subset_params}}@${subset_parameters}@g; s@{{prefix_dim}}@${OUTPUT_PATH}${prefix_product}_${l}-${k}@g" label_mask_preprocessing.in > label_mask_preprocessing_out.xml
                                 $GPT_PATH label_mask_preprocessing_out.xml -c 4G -q 3 -x -J-Xmx15G -J-Xms4G

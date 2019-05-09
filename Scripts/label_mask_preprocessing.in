@@ -29,7 +29,7 @@
       <sourceProduct refid="Resample"/>
     </sources>
     <parameters class="com.bc.ceres.binding.dom.XppDomElement">
-      <sourceBands>B1</sourceBands>
+      <sourceBands>B2</sourceBands>
       <region>{{subset_params}}</region>
       <geoRegion/>
       <subSamplingX>1</subSamplingX>
