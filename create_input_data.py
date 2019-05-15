@@ -1,5 +1,5 @@
- #!/usr/bin/env python
- # coding: utf-8
+#!/usr/bin/env python
+# coding: utf-8
 
 #Import all the dependencies
 import numpy as np
@@ -14,9 +14,9 @@ s2_preprocessor = s2_preprocessor(
     label_dir='./Label_tifs',
     data_dir='./Data',
     input_data_dir='./Input_data',
-    region_of_interest_shapefile='./ROI/ROI2.shp',
+    region_of_interest_shapefile='./ROI/ROI.shp',
     window_dimension=8,
-    tile_dimension=512,
+    tile_dimension=128,
     nb_images=5,
     nb_bands=22,
     nb_steps=8, #This is unused!! #nb_steps defines how many parts the tile will be split into for training

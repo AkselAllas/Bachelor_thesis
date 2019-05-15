@@ -4,3 +4,4 @@
 *.data
 *.swp
 Models/*.h5
+Input_data/*.npy
