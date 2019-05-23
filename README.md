@@ -139,7 +139,7 @@ conda install shapely
 
 conda install -c conda-forge rasterio
 
-Virtuaalse keskkonna kasutamiseks tuleb jooksutada:
+##### Virtuaalse keskkonna kasutamiseks tuleb jooksutada:
 
 source activate environmentName
 
