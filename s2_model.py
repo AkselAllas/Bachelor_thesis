@@ -5,13 +5,16 @@ from keras.callbacks import EarlyStopping
 from keras.optimizers import SGD, RMSprop, adam
 from keras.utils import np_utils
 from keras import regularizers
+import keras
 import tensorflow as tf
 import os
 import numpy as np
+import signal
+import time
 
 class s2_model:
 
-    def __init__(self, s2_preprocessor, batch_size, nb_epochs, nb_filters, max_pool_size, conv_kernel_size, loss_function, optimizer, metrics, cb_list):
+    def __init__(self, s2_preprocessor, batch_size, nb_epochs, nb_filters, max_pool_size, conv_kernel_size, loss_function, optimizer, metrics, cb_list, version):
         self.s2_preprocessor = s2_preprocessor
         self.batch_size = batch_size
         self.nb_epochs = nb_epochs
@@ -22,13 +25,27 @@ class s2_model:
         self.optimizer = optimizer
         self.metrics = metrics
         self.cb_list = cb_list
+        self.version = version 
 
-        model_exists = os.path.exists('current.h5')
-        if (model_exists):
+        model_exists_version = False
+        model_exists_0 = False
+
+        if(version=="0"):
+            model_exists_0 = os.path.exists('current.h5')
+        else:
+            model_exists_version = os.path.exists('Models/'+version+'.h5')
+
+        if (model_exists_0):
             self.model = load_model('current.h5')
             print("**************************************************")
             print("current.h5 model loaded")
+        elif (model_exists_version):
+            self.model = load_model('Models/'+version+'.h5')
+            print("**************************************************")
+            print('Models/'+version+'.h5 loaded')
         else:
+            print("**************************************************")
+            print("Creating own model")
             self.model = Sequential()
             #1st conv
             self.model.add(Conv3D(
@@ -86,7 +103,7 @@ class s2_model:
                 #kernel_regularizer=regularizers.l2(0.01),
                 #activity_regularizer=regularizers.l1(0.01)
             ))
-            self.model.add(Dropout(0.5))
+            #self.model.add(Dropout(0.5))
             self.model.add(Dense(s2_preprocessor.nb_classes,kernel_initializer='normal',
                 #kernel_regularizer=regularizers.l2(0.01),
                 #activity_regularizer=regularizers.l1(0.01)
@@ -140,3 +157,44 @@ class s2_model:
         return(accuracy, empty_percent)
 
          
+
+class SignalStopping(keras.callbacks.Callback):
+    '''Stop training when an interrupt signal (or other) was received
+        # Arguments
+        sig: the signal to listen to. Defaults to signal.SIGTSTP.
+        doubleSignalExits: Receiving the signal twice exits the python
+            process instead of waiting for this epoch to finish.
+        patience: number of epochs with no improvement
+            after which training will be stopped.
+        verbose: verbosity mode.
+    '''
+    # SBW 2018.10.15 Since ctrl-c trapping isn't working, watch for existence of file, e.g. .\path\_StopTraining.txt.
+    def __init__(self, sig=signal.SIGTSTP, doubleSignalExits=False, verbose=1):
+        super(SignalStopping, self).__init__()
+        self.signal_received = False
+        self.verbose = verbose
+        self.doubleSignalExits = doubleSignalExits
+        def signal_handler(sig, frame):
+            self.model.stop_training = True
+            #if self.signal_received and self.doubleSignalExits:
+            #    if self.verbose > 0:
+            #        print('') #new line to not print on current status bar. Better solution?
+            #        print('Received signal to stop ' + str(sig)+' twice. Exiting..')
+            #    exit(sig)
+            #self.signal_received = True
+            #if self.verbose > 0:
+            #    print('') #new line to not print on current status bar. Better solution?
+            #    print('Received signal to stop: ' + str(sig))
+        signal.signal(signal.SIGTSTP, signal_handler)
+        self.stopped_epoch = 0
+
+    def on_epoch_end(self, epoch, logs={}):
+        if self.signal_received:
+            self.stopped_epoch = epoch
+            self.model.stop_training = True
+            print("stop_training=true")
+
+    def on_train_end(self, logs={}):
+        print("on_train_end")
+        if self.stopped_epoch > 0 and self.verbose > 0:
+            print('Epoch %05d: stopping due to signal' % (self.stopped_epoch)) 

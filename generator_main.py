@@ -8,9 +8,9 @@ config.gpu_options.allow_growth = True  # dynamically grow the memory used on th
 config.log_device_placement = True  # to log device placement (on which device the operation ran)
 sess = tf.Session(config=config)
 
-from keras.backend.tensorflow_backend import set_session
+from keras.backend.tensorflow_backend import set_session, clear_session
 set_session(sess)  # set this TensorFlow session as the default 
-from keras.callbacks import EarlyStopping, CSVLogger
+from keras.callbacks import EarlyStopping, CSVLogger, ModelCheckpoint
 from keras.optimizers import SGD, RMSprop, adam
 import time
 import sys
@@ -28,8 +28,10 @@ from read_processed_tiles import *
 
 #V2ga ohtlik, kui panna =3:
 #os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+#os.environ['TF_CUDNN_WORKSPACE_LIMIT_IN_MB'] = '100'
 
 version = str(sys.argv[1])
+version_start = str(sys.argv[2])
 
 s2_preprocessor_params = {'input_dimension':5120, #5120
     'label_dir':'./Label_tifs/',
@@ -51,7 +53,7 @@ plotter = plotter(s2_preprocessor, cmap='tab10')
 
 generator_params = {
     'dim': (8,8,5),
-    'batch_size': 3, #See tuleb 3*512*512 ??
+    'batch_size': 1, #See tuleb 3*512*512 ??
     'nb_classes': 28,
     'nb_channels': 22,
     'dir_path':'./Input_data/',
@@ -61,14 +63,19 @@ generator_params = {
 }
 
 list_IDs = read_processed_tiles()
-list_IDs = list_IDs[4285:]
+list_IDs = list_IDs[1500:]
 list_IDs_len = len(list_IDs)
 print(list_IDs_len)
-input("Press Enter to continue...")
-train_val_split_index = int(list_IDs_len*3/4)
+train_val_split_index = int(list_IDs_len*5/10)
 print(train_val_split_index)
 list_train = list_IDs[:train_val_split_index]
 list_validation = list_IDs[train_val_split_index:]
+
+
+#training_generator = data_generator(list_IDs, **generator_params)
+#X_val, Y_val = training_generator.gene(list_IDs)
+#plotter.plot_input_vs_labels_v2(Y_val,X_val)
+input("Press Enter to continue...")
 
 training_generator = data_generator(list_train, **generator_params)
 validation_generator = data_generator(list_validation, **generator_params)
@@ -79,20 +86,28 @@ validation_generator = data_generator(list_validation, **generator_params)
 
 optimizer_params = { 
     'lr':0.001, 
-    'clipvalue':0.5
 }
+    #'clipvalue':0.5,
+    #'momentum':0.9,
+
+filepath="best_model.h5"
+checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+
+#Callback for CTRL+Z to stop training
+stop_cb = SignalStopping()
+
 
 early_stopping_params = {
     'monitor':'val_loss',
     'min_delta':0, 
-    'patience':2,
-    'verbose':0, 
-    'mode':'auto'
+    'patience':10,
+    'verbose':1, 
+    #'mode':'auto'
 }
 
 s2_model_params = {
     's2_preprocessor' : s2_preprocessor,
-    'batch_size' : 1,
+    'batch_size' : 2,
     'nb_epochs' : 32,
     'nb_filters' : [32, 32, 64],
     'max_pool_size' : [2,2,1],
@@ -100,7 +115,8 @@ s2_model_params = {
     'optimizer' : SGD(**optimizer_params),
     'loss_function' : 'categorical_crossentropy',
     'metrics' : ['mse', 'accuracy'],
-    'cb_list' : [EarlyStopping(**early_stopping_params)]
+    'version' : version_start,
+    'cb_list' : [EarlyStopping(**early_stopping_params),stop_cb,checkpoint]
 }
 
 s2_model = s2_model(**s2_model_params)
@@ -119,10 +135,11 @@ print(class_weights)
 fit_params = {
     'workers':4,
     'class_weight':class_weights,
-    'max_queue_size':6,
-    'epochs':5,
-    'steps_per_epoch':100,
+    'max_queue_size':8,
+    'epochs':100,
+    'steps_per_epoch':32000,
     'use_multiprocessing':True,
+    'callbacks':[EarlyStopping(**early_stopping_params),stop_cb,checkpoint],
 }
 
 start_time = time.time()
@@ -133,6 +150,7 @@ hist = s2_model.model.fit_generator(generator=training_generator,
 time_elapsed = time.time() - start_time
 
 s2_model.save("current.h5")
+s2_model.save("Models/"+version+".h5")
 
 train_loss=hist.history['loss']
 epochs_done=len(train_loss)
@@ -141,6 +159,7 @@ del s2_model_params['optimizer']
 del s2_model_params['cb_list']
 metadata_dict = {
     'Epochs_done' : epochs_done,
+    'Starting_version': version_start,
     'Version': version,
     'Time_elapsed': time_elapsed,
     'Input_data_nb': list_IDs_len,
@@ -154,4 +173,3 @@ metadata_dict = {
 
 np.save('Models/hist'+version+'.npy', hist)
 np.save('Models/metadata'+version+'.npy', metadata_dict)
-

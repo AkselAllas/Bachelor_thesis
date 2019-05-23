@@ -30,8 +30,8 @@ class plotter:
     def plot_model_result(self, hist):
         # Plot the results
         train_loss=hist.history['loss']
-        val_loss=hist.history['val_loss']
         train_acc=hist.history['acc']
+        val_loss=hist.history['val_loss']
         val_acc=hist.history['val_acc']
         mse=hist.history['mean_squared_error']
         xc=range(len(train_loss))
@@ -59,6 +59,82 @@ class plotter:
         plt.style.use(['classic'])
         plt.show()
 
+
+    def plot_model_result_v3(self, npy_list):
+        # Plot the results
+        train_loss=npy_list[0]
+        train_acc=npy_list[1]
+        val_loss=npy_list[2]
+        val_acc=npy_list[3]
+        xc=range(len(train_loss))
+        xd=range(len(val_loss))
+
+        plt.figure(1,figsize=(7,5))
+        plt.plot(xc,train_loss)
+        plt.plot(xd,val_loss)
+        plt.xlabel('num of Epochs')
+        plt.ylabel('loss')
+        plt.title('train_loss vs val_loss')
+        plt.grid(True)
+        plt.legend(['train','val'])
+        #print plt.style.available # use bmh, classic,ggplot for big pictures
+        plt.style.use(['classic'])
+
+        plt.figure(2,figsize=(7,5))
+        plt.plot(xc,train_acc)
+        plt.plot(xd,val_acc)
+        plt.xlabel('num of Epochs')
+        plt.ylabel('accuracy')
+        plt.title('train_acc vs val_acc')
+        plt.grid(True)
+        plt.legend(['train','val'],loc=4)
+        #print plt.style.available # use bmh, classic,ggplot for big pictures
+        plt.style.use(['classic'])
+        plt.show()
+
+    def plot_model_result_v2(self, hist, hist_2):
+        # Plot the results
+        train_loss=hist.history['loss']
+        val_loss=hist.history['val_loss']
+        train_acc=hist.history['acc']
+        val_acc=hist.history['val_acc']
+        mse=hist.history['mean_squared_error']
+        xc=range(len(train_loss))
+
+        train_loss_2=hist_2.history['loss']
+        val_loss_2=hist_2.history['val_loss']
+        train_acc_2=hist_2.history['acc']
+        val_acc_2=hist_2.history['val_acc']
+        mse_2=hist_2.history['mean_squared_error']
+        xc_2=range(len(train_loss_2))
+
+        plt.figure(1,figsize=(7,5))
+        plt.plot(xc,train_loss)
+        plt.plot(xc,val_loss)
+        plt.plot(xc_2,train_loss_2)
+        plt.plot(xc_2,val_loss_2)
+        plt.xlabel('num of Epochs')
+        plt.ylabel('loss')
+        plt.title('train_loss vs val_loss')
+        plt.grid(True)
+        plt.legend(['train','val'])
+        #print plt.style.available # use bmh, classic,ggplot for big pictures
+        plt.style.use(['classic'])
+
+        plt.figure(2,figsize=(7,5))
+        plt.plot(xc,train_acc)
+        plt.plot(xc,val_acc)
+        plt.plot(xc_2,train_acc_2)
+        plt.plot(xc_2,val_acc_2)
+        plt.xlabel('num of Epochs')
+        plt.ylabel('accuracy')
+        plt.title('train_acc vs val_acc')
+        plt.grid(True)
+        plt.legend(['train','val'],loc=4)
+        #print plt.style.available # use bmh, classic,ggplot for big pictures
+        plt.style.use(['classic'])
+        plt.show()
+
     def plot_model_prediction(self, y_predictions, tile_location, label_map_tiles):
         prediction_map = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
         f, axarr = plt.subplots(2,2)
@@ -74,9 +150,9 @@ class plotter:
         axarr[0][1].imshow(label_map_tiles[tile_location[0]][tile_location[1]])
         plt.show()
 
-    def plot_model_prediction_v2(self, y_predictions, true_values, name_arg, predictions_path):
+    def save_plot_model_prediction_v2(self, y_predictions, true_values, name_arg, predictions_path):
         prediction_map = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
-        f, axarr = plt.subplots(2,2)
+        f, axarr = plt.subplots(1,2)
         count=0
         labels_map = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
         for i in range(int(self.s2_preprocessor.tile_dimension)):
@@ -90,8 +166,8 @@ class plotter:
             for j in range(self.s2_preprocessor.tile_dimension):
                     Y_predictions[i][j] = y_predictions[self.s2_preprocessor.tile_dimension*i+j]
         true_val_non_hot = [np.where(r==1)[0][0] for r in true_values]
-        axarr[0][0].imshow(labels_map)
-        axarr[0][1].imshow(Y_predictions)
+        axarr[0].imshow(labels_map)
+        axarr[1].imshow(Y_predictions)
         np.save(predictions_path+'fig'+name_arg+'.npy', f)
         #pickle.dump(fig, open('FigureObject.fig.pickle', 'wb'))
 
@@ -99,12 +175,13 @@ class plotter:
         f, axarr = plt.subplots(2,2)
 
 
+        print(input_data[0][0][3][0])
         input_data_map = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
         for i in range(self.s2_preprocessor.tile_dimension):
             for j in range(self.s2_preprocessor.tile_dimension):
-                    input_data_map[i][j] = input_data[self.s2_preprocessor.tile_dimension*i+j][5][2][2][0]
+                    input_data_map[i][j] = input_data[i][j][3][0]
 
-        axarr[0][0].imshow(input_data_map)
+        axarr[0][0].imshow(input_data[:][:][3][0])
         axarr[0][1].imshow(label_map_tiles[tile_location[0]][tile_location[1]])
         plt.show()
 
@@ -113,12 +190,12 @@ class plotter:
         f, axarr = plt.subplots(2,2)
 
         input_map  = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
-        for i in range(int(self.s2_preprocessor.tile_dimension/2)):
+        for i in range(int(self.s2_preprocessor.tile_dimension)):
             for j in range(self.s2_preprocessor.tile_dimension):
-                    input_map[i][j] = input_data[self.s2_preprocessor.tile_dimension*i+j][0][0][0][0]
+                    input_map[i][j] = input_data[self.s2_preprocessor.tile_dimension*i+j][7][0][0][0]
 
         labels_map  = np.zeros((self.s2_preprocessor.tile_dimension,self.s2_preprocessor.tile_dimension))
-        for i in range(int(self.s2_preprocessor.tile_dimension/2)):
+        for i in range(int(self.s2_preprocessor.tile_dimension)):
             for j in range(self.s2_preprocessor.tile_dimension):
                     labels_map[i][j] = np.argmax(one_hot_labels[self.s2_preprocessor.tile_dimension*i+j])
 
