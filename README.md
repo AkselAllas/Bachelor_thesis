@@ -12,9 +12,7 @@ Sisaldab fit_generator() funktsiooni kasutavat masinõppe treenimise skripti ./g
 
 Sisaldab ennustuste tegemise skripti ./predict.py.
 
-Sisaldab ./Input_data/ ja ./Big_tile_data/ kausta sisendandmete tekitamise skripti ./create_input_data.py.
-
-Sisaldab skripte klasside kaalude arvutamiseks: count_class_occurrences.py, calculate_weights.py ning vastavaid .npy faile.
+Sisaldab klasside kaalude .npy faile.
 
 Sisaldab funktsioone uurimisalasse kuuluvate töötletud ruutude listi tekitamiseks ./read_processed_tiles.py ning uurimisalasse kuuluvate ruutude objekte processed_tile_dict.npy ja zero_tile_dict.npy 
 
@@ -30,7 +28,7 @@ Siia tuleb panna klassifitseeritavata klasside põldude vektorkihid .shp formaad
 
 Siia tuleb panna uuritava huviala vektorkiht .shp formaadis. NB! kõikidel .shp failidel peab olema sama koordinaatsüsteem.
 
-##### Scripts
+##### Gpt_scripts
 
 Sisaldab bash skripte, mis kasutavad omakorda SNAP gpt-d, et töödelda sisendandmeid ning klasside maske.
 
@@ -56,13 +54,21 @@ Lisaks sisaldab mudelite treenimise ajaloo ning metaandmete lugemise skripte
 
 ##### Input_data
 
-Sisaldab ./create_input_data.py poolt loodavaid 128x128 sisendtensorite ning tõeväärtuste binaarfaile.
+Sisaldab ./Scripts/create_input_data.py poolt loodavaid 128x128 sisendtensorite ning tõeväärtuste binaarfaile.
 
 ##### Big_tile_data
 
-Sisaldab ./create_input_data.py poolt loodavaid 512x512 sisendtensorite ning tõeväärtuste binaarfaile.
+Sisaldab ./Scripts/create_input_data.py poolt loodavaid 512x512 sisendtensorite ning tõeväärtuste binaarfaile.
 
 Sisaldab skripti kõige rohkemate erinevate klassidega ruudu leidmiseks ning skripti ruudul esinevate klasside loetlemiseks.
+
+##### Scripts
+
+Sisaldab ./Input_data/ ja ./Big_tile_data/ kausta sisendandmete tekitamise skripti ./Scripts/create_input_data.py.
+
+Sisaldab skripte klasside kaalude arvutamiseks: count_class_occurrences.py, calculate_weights.py ning vastavaid
+
+Sisaldab aktivatsioonide visualiseerimise skripti.
 
 ## Skriptide jooksutamine käsurealt:
 
