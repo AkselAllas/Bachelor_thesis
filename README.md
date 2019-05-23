@@ -103,3 +103,46 @@ n: python read_metadata.py
 
 n: python plot_accuracy.py v47
 
+## Vajaliku keskkonna ülesseadmine
+
+Rangelt soovitatav on luua omaette virtuaalne pythoni keskkond:
+
+conda create -n environmentName python=3.6.7 anaconda
+
+Lisaks installide järgnevad teegid:
+
+conda install ’poppler<0.62’
+
+conda install -c conda-forge ’georaster<1.25’
+
+conda install gdal=2.3.2
+
+conda install -c conda-forge notebook
+
+conda install -c conda-forge keras
+
+conda install -c menpo opencv=3
+
+conda install -c conda-forge matplotlib
+
+conda install pandas
+
+conda install seaborn
+
+conda install scikit-learn
+
+conda install scikit-image
+
+conda install pyshp
+
+conda install shapely
+
+conda install -c conda-forge rasterio
+
+Virtuaalse keskkonna kasutamiseks tuleb jooksutada:
+
+source activate environmentName
+
+Andmete eeltöötluseks läheb vaja ka töötavat SNAP installatsiooni:
+
+https://step.esa.int/main/snap-6-0-released/
