@@ -105,11 +105,11 @@ n: python plot_accuracy.py v47
 
 ## Vajaliku keskkonna ülesseadmine
 
-Rangelt soovitatav on luua omaette virtuaalne pythoni keskkond:
+##### Rangelt soovitatav on luua omaette virtuaalne pythoni keskkond:
 
 conda create -n environmentName python=3.6.7 anaconda
 
-Lisaks installide järgnevad teegid:
+##### Lisaks installid järgnevad teegid:
 
 conda install ’poppler<0.62’
 
@@ -143,6 +143,6 @@ Virtuaalse keskkonna kasutamiseks tuleb jooksutada:
 
 source activate environmentName
 
-Andmete eeltöötluseks läheb vaja ka töötavat SNAP installatsiooni:
+##### Andmete eeltöötluseks läheb vaja ka töötavat SNAP installatsiooni:
 
 https://step.esa.int/main/snap-6-0-released/
