@@ -109,7 +109,7 @@ n: python plot_accuracy.py v47
 
 conda create -n environmentName python=3.6.7 anaconda
 
-##### Lisaks installid järgnevad teegid:
+##### Installida tuleb järgnevad teegid:
 
 conda install ’poppler<0.62’
 
