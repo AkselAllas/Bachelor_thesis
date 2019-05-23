@@ -3,7 +3,7 @@ echo "================ Phase 1 ================="
 #Generate .dim files, which are needed to make label masks 
 
 GPT_PATH=/sar/aksel_snap/snap/bin/gpt
-OUTPUT_PATH=/sar/aksel/Bachelor_thesis/Scripts/
+OUTPUT_PATH=/sar/aksel/Bachelor_thesis/Gpt_scripts/
 INPUT_PATH=/sar/aksel/Bachelor_thesis/S2_Products/
 
 #NB! The generated files will get the suffix '_y-x' where y will show the tile's number along y-axis and x along x-axis. This is so that tile location notation would be the same as the way python 2D arrays are indexed.

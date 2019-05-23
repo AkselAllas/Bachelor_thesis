@@ -5,16 +5,21 @@
 import numpy as np
 from keras.utils import np_utils
 
+import sys
+sys.path.append( '..' )
+
 from s2_preprocessor import *
 from plotter import *
+
+
 
 #Create labels
 s2_preprocessor = s2_preprocessor(
     input_dimension=5120, #5120
-    label_dir='./Label_tifs',
-    data_dir='./Data',
-    input_data_dir='./Input_data',
-    region_of_interest_shapefile='./ROI/ROI.shp',
+    label_dir='../Label_tifs',
+    data_dir='../Data',
+    input_data_dir='../Input_data',
+    region_of_interest_shapefile='../ROI/ROI.shp',
     window_dimension=8,
     tile_dimension=128,
     nb_images=5,
