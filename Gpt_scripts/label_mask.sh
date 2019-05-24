@@ -35,7 +35,7 @@ OUTPUT_PATH=/sar/aksel/Bachelor_thesis/Label_tifs/
 for (( k = 0; k < 2; k++ )); do
         for (( l = 0; l < 2; l++ )); do
                 #break #Uncomment this line to skip Phase 2
-                INPUT_PATH=/sar/aksel/Bachelor_thesis/Scripts/${prefix_product}_${l}-${k}.dim
+                INPUT_PATH=/sar/aksel/Bachelor_thesis/Gpt_scripts/${prefix_product}_${l}-${k}.dim
                 for mask_file in $(ls $MASK_PATH); do
                         index=$((${#mask_file}-3))
                         mask_file_extension="${mask_file:$index:3}"
