@@ -13,12 +13,12 @@ for product in $(ls $INPUT_PATH); do
         prefix_product=${product:11:-46}
         #break #Uncomment this line to skip Phase 1
         if [ "${product_file_extension}" = "SAFE" ]; then
-                for (( k = 0; k < 2; k++ )); do
-                        for (( l = 0; l < 2; l++ )); do
+                for (( k = 0; k < 1; k++ )); do
+                        for (( l = 0; l < 1; l++ )); do
                                 y=$( expr 5120 '*' "$l")
                                 x=$( expr 5120 '*' "$k" + 740 )
-                                subset_parameters="$x,$y,5120,5120"
-                                sed "s@{{input_safe}}@${INPUT_PATH}${product}@g; s@{{subset_params}}@${subset_parameters}@g; s@{{prefix_dim}}@${OUTPUT_PATH}${prefix_product}_${l}-${k}@g" label_mask_preprocessing.in > label_mask_preprocessing_out.xml
+                                subset_parameters="6028,7591,2048,2048"
+                                sed "s@{{input_safe}}@${INPUT_PATH}${product}@g; s@{{subset_params}}@${subset_parameters}@g; s@{{prefix_dim}}@${OUTPUT_PATH}${prefix_product}_xx@g" label_mask_preprocessing.in > label_mask_preprocessing_out.xml
                                 $GPT_PATH label_mask_preprocessing_out.xml -c 4G -q 3 -x -J-Xmx15G -J-Xms4G
                         done
                 done
@@ -35,7 +35,7 @@ OUTPUT_PATH=/sar/aksel/Bachelor_thesis/Label_tifs/
 for (( k = 0; k < 2; k++ )); do
         for (( l = 0; l < 2; l++ )); do
                 #break #Uncomment this line to skip Phase 2
-                INPUT_PATH=/sar/aksel/Bachelor_thesis/Scripts/${prefix_product}_${l}-${k}.dim
+                INPUT_PATH=/sar/aksel/Bachelor_thesis/Gpt_scripts/${prefix_product}_xx.dim
                 for mask_file in $(ls $MASK_PATH); do
                         index=$((${#mask_file}-3))
                         mask_file_extension="${mask_file:$index:3}"
@@ -43,7 +43,7 @@ for (( k = 0; k < 2; k++ )); do
                                 mask=${mask_file::-4}
                                 echo $mask
                                 prefix_mask="Mask_${mask}"
-                                sed "s@{{input_dim}}@${INPUT_PATH}@g; s@{{mask_file}}@${MASK_PATH}${mask_file}@g; s@{{mask}}@${mask}@g; s@{{prefix_mask}}@${OUTPUT_PATH}${prefix_mask}_${l}-${k}@g" label_mask_preprocessing_2.in > label_mask_preprocessing_out_2.xml
+                                sed "s@{{input_dim}}@${INPUT_PATH}@g; s@{{mask_file}}@${MASK_PATH}${mask_file}@g; s@{{mask}}@${mask}@g; s@{{prefix_mask}}@${OUTPUT_PATH}${prefix_mask}_xx@g" label_mask_preprocessing_2.in > label_mask_preprocessing_out_2.xml
                                 $GPT_PATH label_mask_preprocessing_out_2.xml -c 4G -q 3 -x -J-Xmx15G -J-Xms4G 2>>error_tiles.txt 
                                 echo "${mask}_${l}-${k}">>error_tiles.txt
                         fi
