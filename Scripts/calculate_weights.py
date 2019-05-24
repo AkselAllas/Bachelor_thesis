@@ -5,6 +5,9 @@ import numpy as np
 import sys
 nb_class_pixels = np.load("class_counts.npy")
 
+print(nb_class_pixels)
+print(np.sum(nb_class_pixels))
+
 #classes = np.unique(Vd)
 classes = np.zeros((28))
 for i in range(28):
