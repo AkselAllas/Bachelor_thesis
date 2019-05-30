@@ -44,7 +44,7 @@ Siia tekitab ./Scripts/label_mask.sh klasside rasterfailid.
 
 Sisaldab ./predict.py poolt tekitatud ennustuse tulemusi ning graafikuid. 
 
-Lisaks sisaldab ennustuste visualiseerimiseks vajalikke käsurea skripte
+Lisaks sisaldab ennustuste visualiseerimiseks vajalikke käsurea skripte, vea-maatriksi tekitamise skripti ja kogutäpsuse arvutamise skripti.
 
 ##### Models 
 
