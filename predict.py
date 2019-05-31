@@ -69,8 +69,13 @@ else:
     list_IDs = read_processed_tiles_512x512()
     list_IDs = [str(list_IDs[tile_arg])]
 
-print("Prediction for:")
-print(list_IDs)
+#print(read_processed_tiles_512x512()[20:])
+#print(len(read_processed_tiles_512x512()))
+#input("Press Enter to continue...")
+
+#print("Prediction for:")
+#print(list_IDs)
+#input("Press Enter to continue...")
 
 training_generator = data_generator(list_IDs, **params)
 #X_val, Y_val = validation_generator.gene(list_validation[:1])

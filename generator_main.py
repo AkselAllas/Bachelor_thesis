@@ -137,7 +137,7 @@ fit_params = {
     'class_weight':class_weights,
     'max_queue_size':8,
     'epochs':100,
-    'steps_per_epoch':32000,
+    'steps_per_epoch':15500,
     'use_multiprocessing':True,
     'callbacks':[EarlyStopping(**early_stopping_params),stop_cb,checkpoint],
 }

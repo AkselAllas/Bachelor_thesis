@@ -5,3 +5,5 @@
 *.swp
 Input_data/*.npy
 Big_tile_data/*.npy
+Trash/*
+Tests/*

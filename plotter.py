@@ -39,24 +39,20 @@ class plotter:
         plt.figure(1,figsize=(7,5))
         plt.plot(xc,train_loss)
         plt.plot(xc,val_loss)
-        plt.xlabel('num of Epochs')
-        plt.ylabel('loss')
-        plt.title('train_loss vs val_loss')
+        plt.xlabel('Epohhide arv')
+        plt.ylabel('Kadu')
         plt.grid(True)
-        plt.legend(['train','val'])
+        plt.legend(['treenimine','valideerimine'])
         #print plt.style.available # use bmh, classic,ggplot for big pictures
-        plt.style.use(['classic'])
 
         plt.figure(2,figsize=(7,5))
         plt.plot(xc,train_acc)
         plt.plot(xc,val_acc)
-        plt.xlabel('num of Epochs')
-        plt.ylabel('accuracy')
-        plt.title('train_acc vs val_acc')
+        plt.xlabel('Epohhide arv')
+        plt.ylabel('Kogutapsus')
         plt.grid(True)
-        plt.legend(['train','val'],loc=4)
+        plt.legend(['treenimine','valideerimine'],loc=4)
         #print plt.style.available # use bmh, classic,ggplot for big pictures
-        plt.style.use(['classic'])
         plt.show()
 
 
@@ -72,24 +68,22 @@ class plotter:
         plt.figure(1,figsize=(7,5))
         plt.plot(xc,train_loss)
         plt.plot(xd,val_loss)
-        plt.xlabel('num of Epochs')
-        plt.ylabel('loss')
-        plt.title('train_loss vs val_loss')
+        plt.xlabel('Epohhide arv')
+        plt.ylabel('Kadu')
         plt.grid(True)
-        plt.legend(['train','val'])
+        plt.legend(['treenimine','valideerimine'])
         #print plt.style.available # use bmh, classic,ggplot for big pictures
-        plt.style.use(['classic'])
+        #plt.style.use(['classic'])
 
         plt.figure(2,figsize=(7,5))
         plt.plot(xc,train_acc)
         plt.plot(xd,val_acc)
-        plt.xlabel('num of Epochs')
-        plt.ylabel('accuracy')
-        plt.title('train_acc vs val_acc')
+        plt.xlabel('Epohhide arv')
+        plt.ylabel('Kogutapsus')
         plt.grid(True)
-        plt.legend(['train','val'],loc=4)
+        plt.legend(['treenimine','valideerimine'],loc=4)
         #print plt.style.available # use bmh, classic,ggplot for big pictures
-        plt.style.use(['classic'])
+        #plt.style.use(['classic'])
         plt.show()
 
     def plot_model_result_v2(self, hist, hist_2):
@@ -166,8 +160,8 @@ class plotter:
             for j in range(self.s2_preprocessor.tile_dimension):
                     Y_predictions[i][j] = y_predictions[self.s2_preprocessor.tile_dimension*i+j]
         true_val_non_hot = [np.where(r==1)[0][0] for r in true_values]
-        axarr[0].imshow(labels_map)
-        axarr[1].imshow(Y_predictions)
+        axarr[0].imshow(labels_map,vmax=28)
+        axarr[1].imshow(Y_predictions,vmax=28)
         np.save(predictions_path+'fig'+name_arg+'.npy', f)
         #pickle.dump(fig, open('FigureObject.fig.pickle', 'wb'))
 
@@ -236,4 +230,4 @@ class plotter:
 
         img = arr.imshow(labels_map,vmin=0,vmax=self.s2_preprocessor.nb_classes,cmap=self.cmap)
         cig = f.colorbar(img)
-        plt.show()
+        ubplotlt.show()

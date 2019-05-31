@@ -21,4 +21,4 @@ weights = total_pixels/(28*nb_class_pixels)
 for i in range(28):
     print(weights[i])
     print(nb_class_pixels[i])
-np.save("class_weights.npy",weights)
+#np.save("class_weights.npy",weights)

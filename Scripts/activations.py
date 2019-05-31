@@ -22,8 +22,7 @@ from s2_preprocessor import *
 from s2_model import *
 from plotter import *
 
-version = str(sys.argv[1])
-version_start = str(sys.argv[2])
+version_start = str(sys.argv[1])
 
 #Because fit_generator needs different data preprocessing functions, then we define functions for windowing in this script
 def input_windows_preprocessing(preprocessor_X_output, preprocessor_Y_output, s2_preprocessor):
@@ -191,9 +190,16 @@ for a in range(int(round(s2_preprocessor.input_dimension/s2_preprocessor.tile_di
             #Splitting data to train, val sets:
             X_train, X_val, Y_train, Y_val = train_test_split(X, Y, test_size=0.5, random_state=4)
 
-            get_activations = K.function([s2_model.model.layers[0].input, K.learning_phase()], [s2_model.model.layers[0].output,])
-            activations = get_activations([X_train[:3],0])
-            s2_model.model.summary()
-            ax=np.array(activations)
-            print(ax.shape)
-            #print(ax)
+            get_activations_1 = K.function([s2_model.model.layers[0].input, K.learning_phase()], [s2_model.model.layers[0].output,])
+            activations_1 = get_activations_1([X_train[:3],0])
+            ax_1=np.array(activations_1)
+
+            #get_activations_2 = K.function([s2_model.model.layers[4].input, K.learning_phase()], [s2_model.model.layers[4].output,])
+            #activations_2 = get_activations_2([X_train[:3],0])
+            #ax_2=np.array(activations_2)
+
+            #get_activations_3 = K.function([s2_model.model.layers[8].input, K.learning_phase()], [s2_model.model.layers[8].output,])
+            #activations_3 = get_activations_3([X_train[:3],0])
+            #ax_3=np.array(activations_3)
+
+            print(ax_1.shape)
